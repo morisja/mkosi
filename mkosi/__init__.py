@@ -3668,7 +3668,8 @@ def build_image(context: Context) -> None:
         install_pe_addons(context)
         run_sysusers(context)
         run_tmpfiles(context)
-        run_preset(context)
+        if context.config.execute_systemd_preset:
+            run_preset(context)
         run_depmod(context)
         run_firstboot(context)
         run_hwdb(context)

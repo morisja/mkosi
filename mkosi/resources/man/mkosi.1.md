@@ -321,6 +321,7 @@ Configuration is parsed in the following order:
 * If any profiles are configured, their configuration is parsed from the
   `mkosi.profiles/` directory.
 * Subimages are parsed from the `mkosi.images` directory if it exists.
+        execute_systemd_preset=True,
 
 Note that settings configured via the command line always override
 settings configured via configuration files. If the same setting is
@@ -1100,6 +1101,10 @@ boolean argument: either `1`, `yes`, or `true` to enable, or `0`, `no`,
    written to `/etc/machine-id`. If not specified explicitly and the file
    `mkosi.machine-id` exists in the local directory, the UUID to use is
    read from it. Otherwise, `uninitialized` will be written to `/etc/machine-id`.
+
+`ExecuteSystemdPreset=`, `--execute-systemd-preset=`
+
+:  Controls if `systemctl preset` is executed during build. Defaults to true.
 
 ### [Validation] Section
 

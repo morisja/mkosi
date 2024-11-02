@@ -1719,6 +1719,8 @@ class Config:
     kernel_modules_initrd_exclude: list[str]
     kernel_modules_initrd_include_host: bool
 
+    execute_systemd_preset: bool
+
     locale: Optional[str]
     locale_messages: Optional[str]
     keymap: Optional[str]
@@ -2757,8 +2759,16 @@ SETTINGS = (
         metavar="BOOL",
         section="Content",
         parse=config_parse_boolean,
+        default=True,
         help="When building a kernel modules initrd, include the currently loaded modules "
         "on the host in the image",
+    ),
+    ConfigSetting(
+        dest="execute_systemd_preset",
+        metavar="BOOL",
+        section="Content",
+        parse=config_parse_boolean,
+        help="When building execute systemd preset-all",
     ),
     ConfigSetting(
         dest="kernel_modules_initrd_exclude",
@@ -4636,6 +4646,8 @@ def summary(config: Config) -> str:
       Kernel Modules Initrd Include: {line_join_list(config.kernel_modules_initrd_include)}
       Kernel Modules Initrd Exclude: {line_join_list(config.kernel_modules_initrd_exclude)}
  Kernel Modules Initrd Include Host: {yes_no(config.kernel_modules_initrd_include_host)}
+
+             Execute Systemd Preset: {yes_no(config.execute_systemd_preset)}
 
                              Locale: {none_to_default(config.locale)}
                     Locale Messages: {none_to_default(config.locale_messages)}
